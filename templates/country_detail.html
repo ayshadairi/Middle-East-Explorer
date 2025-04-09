@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Middle East Countries</title>
+    <title>{{ country.name }}</title>
 </head>
 <body>
-    <h1>Middle Eastern Countries</h1>
-    <ul>
-        {% for country in countries %}
-            <li>{{ country }}</li>
-        {% endfor %}
-    </ul>
+    <h1>{{ country.name }}</h1>
+    <p>{{ country.description }}</p>
+    <img src="{{ url_for('static', filename=country.image) }}" alt="{{ country.name }}" width="300">
+    <br>
     <a href="{{ url_for('home') }}">Back to Home</a>
 </body>
 </html>
+

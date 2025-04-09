@@ -1,31 +1,37 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template
 import csv
 
 app = Flask(__name__)
 
-# Function to read data from data.csv
-def get_country_data():
-    countries = []
-    with open('data.csv', newline='') as csvfile:
-        csvreader = csv.DictReader(csvfile)
-        for row in csvreader:
-            countries.append({
-                'name': row['name'],
-                'image': row['image'],
-                'description': row['description']
-            })
-    return countries
-
-# Homepage Route
 @app.route('/')
 def home():
-    return render_template('home.html')
+    countries = []
+    with open('data.csv', mode='r') as file:
+        reader = csv.reader(file)
+        next(reader)
+        for row in reader:
+            countries.append({
+                'name': row[0],
+                'description': row[2],
+                'image': 'uploads/' + row[1].lower().replace(' ', '_') + '.jpg'
+            })
+    return render_template('home.html', countries=countries)
 
-# Countries Page Route (to display country data)
-@app.route('/countries')
-def countries():
-    countries_data = get_country_data()  # Read from data.csv
-    return render_template('countries.html', countries=countries_data)
+@app.route('/country/<country_name>')
+def country_detail(country_name):
+    country = None
+    with open('data.csv', mode='r') as file:
+        reader = csv.reader(file)
+        next(reader)
+        for row in reader:
+            if row[0].lower().replace(' ', '_') == country_name.lower():
+                country = {
+                    'name': row[0],
+                    'description': row[2],
+                    'image': 'uploads/' + row[1].lower().replace(' ', '_') + '.jpg'
+                }
+                break
+    return render_template('country_detail.html', country=country)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
