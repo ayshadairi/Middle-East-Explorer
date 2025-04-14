@@ -5,33 +5,25 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
+    return render_template('index.html')
+
+@app.route('/countries')
+def countries():
     countries = []
     with open('data.csv', mode='r') as file:
-        reader = csv.reader(file)
-        next(reader)
+        reader = csv.DictReader(file)  # Use DictReader to get field names
         for row in reader:
             countries.append({
-                'name': row[0],
-                'description': row[2],
-                'image': 'uploads/' + row[1].lower().replace(' ', '_') + '.jpg'
+                'name': row['Name'],
+                'image': 'uploads/' + row['Image'].lower().replace(' ', '_') + '.jpg',
+                'capital': row['Capital'],
+                'population': row['Population'],
+                'region': row['Region'],
+                'description': row['Description']
             })
-    return render_template('home.html', countries=countries)
-
-@app.route('/country/<country_name>')
-def country_detail(country_name):
-    country = None
-    with open('data.csv', mode='r') as file:
-        reader = csv.reader(file)
-        next(reader)
-        for row in reader:
-            if row[0].lower().replace(' ', '_') == country_name.lower():
-                country = {
-                    'name': row[0],
-                    'description': row[2],
-                    'image': 'uploads/' + row[1].lower().replace(' ', '_') + '.jpg'
-                }
-                break
-    return render_template('country_detail.html', country=country)
+    return render_template('countries.html', countries=countries)
 
 if __name__ == '__main__':
     app.run()
+
+

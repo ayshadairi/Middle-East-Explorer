@@ -3,15 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Middle East Countries</title>
+    <title>Explore Middle Eastern Countries</title>
 </head>
 <body>
     <h1>Middle Eastern Countries</h1>
-    <ul>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Capital</th>
+            <th>Population</th>
+            <th>Region</th>
+            <th>Image</th>
+            <th>Description</th>
+        </tr>
         {% for country in countries %}
-            <li>{{ country }}</li>
+        <tr>
+            <td>{{ country.name }}</td>
+            <td>{{ country.capital }}</td>
+            <td>{{ country.population }}</td>
+            <td>{{ country.region }}</td>
+            <td><img src="{{ url_for('static', filename=country.image) }}" alt="{{ country.name }}" width="100"></td>
+            <td>{{ country.description }}</td>
+        </tr>
         {% endfor %}
-    </ul>
+    </table>
     <a href="{{ url_for('home') }}">Back to Home</a>
 </body>
 </html>
+
+
