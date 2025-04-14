@@ -2,33 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Explore Middle Eastern Countries</title>
+    <title>Countries</title>
 </head>
 <body>
-    <h1>Middle Eastern Countries</h1>
+    <h1>All Countries</h1>
     <table border="1">
-        <tr>
-            <th>Name</th>
-            <th>Capital</th>
-            <th>Population</th>
-            <th>Region</th>
-            <th>Image</th>
-            <th>Description</th>
-        </tr>
-        {% for country in countries %}
-        <tr>
-            <td>{{ country.name }}</td>
-            <td>{{ country.capital }}</td>
-            <td>{{ country.population }}</td>
-            <td>{{ country.region }}</td>
-            <td><img src="{{ url_for('static', filename=country.image) }}" alt="{{ country.name }}" width="100"></td>
-            <td>{{ country.description }}</td>
-        </tr>
-        {% endfor %}
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Capital</th>
+                <th>Population</th>
+                <th>Region</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for country in countries %}
+            <tr>
+                <td>{{ country.name }}</td>
+                <td><img src="{{ country.image }}" alt="{{ country.name }}" width="100"></td>
+                <td>{{ country.capital }}</td>
+                <td>{{ country.population }}</td>
+                <td>{{ country.region }}</td>
+                <td>{{ country.description }}</td>
+                <td>
+                    <form action="{{ url_for('remove_country', country_name=country.name|replace(' ', '_')) }}" method="POST">
+                        <button type="submit">Remove</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
-    <a href="{{ url_for('home') }}">Back to Home</a>
+
+    <a href="{{ url_for('index') }}">Back to Home</a>
 </body>
 </html>
+
+
+
+
 
 
