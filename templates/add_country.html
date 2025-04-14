@@ -1,38 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add New Country</title>
-</head>
-<body>
-    <h1>Add a New Country</h1>
-    <form action="{{ url_for('add_country') }}" method="POST" enctype="multipart/form-data">
+{% extends "layout.html" %}
+
+{% block title %}Add New Country{% endblock %}
+
+{% block content %}
+<h2>Add a New Country</h2>
+<form action="{{ url_for('add_country') }}" method="POST" enctype="multipart/form-data">
+    <div class="mb-3">
         <label for="name">Country Name:</label>
-        <input type="text" id="name" name="name"><br><br>
+        <input type="text" id="name" name="name" class="form-control">
+    </div>
 
+    <div class="mb-3">
         <label for="capital">Capital:</label>
-        <input type="text" id="capital" name="capital"><br><br>
+        <input type="text" id="capital" name="capital" class="form-control">
+    </div>
 
+    <div class="mb-3">
         <label for="population">Population:</label>
-        <input type="number" id="population" name="population"><br><br>
+        <input type="number" id="population" name="population" class="form-control">
+    </div>
 
+    <div class="mb-3">
         <label for="region">Region:</label>
-        <input type="text" id="region" name="region"><br><br>
+        <input type="text" id="region" name="region" class="form-control">
+    </div>
 
+    <div class="mb-3">
         <label for="image">Image (JPG/PNG/GIF):</label>
-        <input type="file" id="image" name="image" accept="image/*"><br><br>
+        <input type="file" id="image" name="image" accept="image/*" class="form-control">
+    </div>
 
-        <label for="description">Description:</label><br>
-        <textarea id="description" name="description" rows="4"></textarea><br><br>
+    <div class="mb-3">
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="4" class="form-control"></textarea>
+    </div>
 
-        <button type="submit">Add Country</button>
-    </form>
-
-    <a href="{{ url_for('index') }}">Back to Home</a>
-    <script src="{{ url_for('static', filename='js/form-validation.js') }}"></script>
-</body>
-
-</body>
-</html>
-
-
+    <button type="submit" class="btn btn-success">Add Country</button>
+</form>
+<script src="{{ url_for('static', filename='js/form-validation.js') }}"></script>
+{% endblock %}

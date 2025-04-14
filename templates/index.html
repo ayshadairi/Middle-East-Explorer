@@ -1,21 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Middle East Countries</title>
-</head>
-<body>
-    <h1>Middle Eastern Countries</h1>
-    <a href="{{ url_for('countries') }}">View All Countries</a><br><br>
-    <a href="{{ url_for('add_form') }}">Add New Country</a>
-</body>
-</html>
+{% extends "layout.html" %}
 
+{% block title %}Home{% endblock %}
 
-
-
-
-
-
-
-
+{% block content %}
+    <p class="text-center">Welcome to the Middle Eastern Countries Info Site!</p>
+{% endblock %}
