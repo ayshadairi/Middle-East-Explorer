@@ -20,9 +20,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert("Please enter a capital.");
                 valid = false;
             }
-
-            if (isNaN(populationInput.value) || populationInput.value.trim() === "") {
-                alert("Please enter a valid population number.");
+            if (isNaN(populationInput.value) ||
+                populationInput.value.trim() === "" ||
+                Number(populationInput.value) < 0
+            ) {
+                alert("Please enter a valid population number (positive only).");
                 valid = false;
             }
 
