@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %}Welcome to CountryApp{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h1 class="display-4 text-info">Welcome to CountryApp</h1>
+    <p class="lead">Explore countries of the Middle East and North Africa 🌍</p>
+    <img src="{{ url_for('static', filename='uploads/world.jpg') }}" class="img-fluid rounded shadow mt-4" alt="World Map" style="max-height: 400px;">
+    <div class="mt-5">
+        <a href="{{ url_for('show_countries') }}" class="btn btn-outline-info btn-lg">View Countries</a>
+    </div>
+</div>
+{% endblock %}

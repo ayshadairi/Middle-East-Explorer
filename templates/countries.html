@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}All Countries{% endblock %}
+
+{% block content %}
+<h2 class="mb-4 text-center text-info">Countries of the Middle East & North Africa</h2>
+
+<div class="row">
+    {% for country in countries %}
+    <div class="col-md-4 mb-4">
+        <div class="card bg-dark text-light shadow h-100 border-secondary">
+            <img src="{{ url_for('static', filename='uploads/' + country.Image.split('/')[-1]) }}" class="card-img-top" alt="{{ country.Name }}">
+            <div class="card-body">
+                <h5 class="card-title text-info">{{ country.Name }}</h5>
+                <p class="card-text"><strong>Capital:</strong> {{ country.Capital }}</p>
+                <p class="card-text"><strong>Population:</strong> {{ country.Population }}</p>
+                <p class="card-text">
+                        <span class="short-desc">{{ country.Description[:100] }}...</span>
+                        <span class="full-desc d-none">{{ country.Description }}</span>
+                        <a href="#" class="read-toggle text-info text-decoration-none">Read more</a>
+                </p>
+            </div>
+            <div class="card-footer bg-transparent d-flex justify-content-end">
+                <form action="{{ url_for('delete_country', name=country.Name|replace(' ', '_')) }}" method="POST">
+                    <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
